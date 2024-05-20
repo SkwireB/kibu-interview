@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Kibu Technical Project
+
+Welcome to the Kibu Technical Project portion of the interview! Congratulations for making it this far. This project should take between 1-2 hours to complete.
+
+## Overview
+
+The admin tooling features of Kibu are a large part of our product. In this project you will create a basic implementation of viewing and creating notes for a user. You will create a basic react front end which connects to a simple backend containing users and notes.
+
+## Specification
+
+Your solution must include the following:
+
+1. Utilize React and TypeScript
+2. A page to list all users and their respective notes
+3. Ability to create a new note for a user
+
+If time allows the following are nice to have features:
+
+1. Add a new field to note called `timestamp` which tracks the current time when saved
+2. Ability to update a note
+3. Add a new resource in the backend called `audit_log` which tracks changes when a note is updated
+
+The following can be considered out of scope:
+
+1. Authorization, authentication, and security of the backend server
+
+## Backend Server
+
+To help with your implementation we have provided a way to easily use a backend server with the `json-server` package. First install the `json-server` package with
+
+```
+npm install -g json-server
+```
+
+Then start the server using
+
+```
+json-server --watch db.json
+```
+
+You should see the following output in your terminal
+
+```
+Index:
+http://localhost:3000/
+
+Static files:
+Serving ./public directory if it exists
+
+Endpoints:
+http://localhost:3000/members
+http://localhost:3000/notes
+```
+
+This will create GET, POST, PUT, PATCH, and DELETE routes for both `/members` and `/notes`.
+
+You can learn more about `json-server` [here](https://www.npmjs.com/package/json-server/v/0.16.1)
 
 ## Getting Started
 
-First, run the development server:
+To complete this project you will not need to make any changes to the `json-server`. Therefore, to get started you should create a new React App. You can learn more from the [React Docs](https://react.dev/learn/start-a-new-react-project)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Scoring
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You will be scored on:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Code functionality
+2. Code quality
+3. Thoughtful design and UI
+4. Documentation on any design decisions or libraries used
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Bonus points for:
 
-## Learn More
+1. Using [NextJs](https://nextjs.org/docs) with server components
+2. Using [React Query](https://tanstack.com/query/latest/docs/framework/react/overview)
 
-To learn more about Next.js, take a look at the following resources:
+## Submission
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+You will submit your code via GitHub (or your git repository of preference) and email the link to [ben@kibuhq.com](mailto:ben@kibuhq.com). Your Git repo should include documentation on how to run your application locally.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Feel free to reach out to ask followup questions or clarify any requirements.
