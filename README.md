@@ -1,7 +1,5 @@
 # Kibu Technical Project
 
-Welcome to the Kibu Technical Project portion of the interview! Congratulations for making it this far. This project should take between 1-2 hours to complete.
-
 ## Overview
 
 This is a simple notes taking and member recording application for the Kibu Technical Interview.
