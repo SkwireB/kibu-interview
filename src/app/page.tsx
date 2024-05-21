@@ -1,40 +1,75 @@
-"use client";
-import React, { useState } from "react";
-import { Note } from "./note";
-import NoteList from "./noteList";
-import jsonFile from "./db.json";
+import React, { useState, useEffect } from 'react';
+import { getMembers, getMemberNotes, createNote, Member, Note } from './api';
 
-export default function Home({}: {setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;}) {
+const MemberNotes: React.FC = () => {
+  const [members, setMembers] = useState<Member[]>([]);
+  const [selectedMemberId, setSelectedMemberId] = useState<string>('');
   const [notes, setNotes] = useState<Note[]>([]);
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [newNoteText, setNewNoteText] = useState<string>('');
 
-  const [editingNoteText, setEditingNoteText] = useState<string>("");
-  const [editingNoteId, setEditingNoteId] = useState<number | null>(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedMembers = await getMembers();
+      setMembers(fetchedMembers);
+    };
 
-  const openModal = () => setIsModalOpen(true);
+    fetchData();
+  }, []);
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedColor(null);
-    setEditingNoteText("");
-    setEditingNoteId(null);
+  const handleMemberChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const memberId = event.target.value;
+    setSelectedMemberId(memberId);
+    const memberNotes = await getMemberNotes(memberId);
+    setNotes(memberNotes);
   };
-  
+
+  const handleCreateNote = async () => {
+    if (!selectedMemberId || !newNoteText) return;
+
+    try {
+      await createNote(selectedMemberId, newNoteText);
+      const updatedNotes = await getMemberNotes(selectedMemberId);
+      setNotes(updatedNotes);
+      setNewNoteText('');
+    } catch (error) {
+      console.error('Error creating note:', error);
+    }
+  };
+
   return (
-    <main>
-      <div className="container">
-        <div className="flex-1">
-          <NoteList
-            notes={notes}
-            editingNoteText={editingNoteText}
-            setEditingNoteText={setEditingNoteText}
-            editingNoteId={editingNoteId}
-            setEditingNoteId={setEditingNoteId}
-            openModal={openModal}
-          />
-        </div>
+    <div>
+      <h1>Member Notes</h1>
+      <div>
+        <label htmlFor="memberSelect">Select a Member:</label>
+        <select id="memberSelect" value={selectedMemberId} onChange={handleMemberChange}>
+          <option value="">Select Member</option>
+          {members.map((member) => (
+            <option key={member.id} value={member.id}>
+              {member.firstName} {member.lastName}
+            </option>
+          ))}
+        </select>
       </div>
-    </main>
-  )
-}
+      <div>
+        <h2>Notes</h2>
+        {selectedMemberId && (
+          <div>
+            <ul>
+              {notes.map((note) => (
+                <li key={note.id}>{note.text}</li>
+              ))}
+            </ul>
+            <textarea
+              value={newNoteText}
+              onChange={(e) => setNewNoteText(e.target.value)}
+              placeholder="Enter new note"
+            />
+            <button onClick={handleCreateNote}>Add Note</button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default MemberNotes;
