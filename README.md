@@ -11,10 +11,13 @@ NextJs - setup and server components
 Axios - for interacting with the server using api calls
 React Query - for managing server state by fetching and caching data
 
-
 ## Design
 
-I designed my application to be customer accessible., 
+I designed my application to be customer accessible, and be easy to read. Each members notes is seperated by a dropdown, and the add button will only add to the current user.
+This simplifies the process by sorting each customers notes onto their own page and makes adding notes for individual users less confusing.
+For the backend, I've chosen to keep track of everything within a state on a main page, such that the page will control which user is showing, and if a note can be added.
+I've elected to seperate the api calls onto a seperate page, and have the frontend import from the api page for its methods.
+I utilized Axios and React Query when building the backend to easily interact with the json database.
 
 ## Run and Test
 To run:
