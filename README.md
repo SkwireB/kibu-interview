@@ -46,3 +46,7 @@ npm install dev
 
 Then open a browser and navigate to http://localhost:3001/, since 3000 is already hosting the json.
 
+## Remarks
+
+I spent over 2 hours total on this project. If worked on further, I would add the ability to modify existing messages, and a way to log and display timestamps for new messages.
+
